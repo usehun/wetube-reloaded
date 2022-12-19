@@ -42,3 +42,5 @@
     node index.js : 파일을 실행
 
 #### 2022-12-19 index.js, json 파일 생성, .gitignore, babel, nodemon 사용설정
+
+####
