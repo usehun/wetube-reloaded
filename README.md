@@ -1,3 +1,5 @@
+# Youtube Clone
+
 ### Set up
 
     npm init을 사용하여 package.json 파일 생성
@@ -65,6 +67,19 @@
     두 번째 인수의 이름은 일반적으로 "res"이며 응답 개체를 받습니다.
     res.end()는 아무 것도 반환하지 않고 응답을 종료합니다. res.send()는 사용자의 브라우저에 입력을 반환합니다. 이 특정 예에서 사용자는 "I still love you."라는 문자열을 보게 됩니다.
 
-#### 2022-12-19 index.js, json 파일 생성, .gitignore, babel, nodemon 사용설정
+### 미들웨어
+
+    미들웨어는 요청과 응답 사이의 소프트웨어이다.
+    모든 미들웨어는 핸들러입니다. 모든 컨트롤러는 미들웨어이다.
+    다음 인수를 포함하여 세 가지 인수가 있다. => (req, res, next)
+    미들웨어는 request에 응답하지 않는다. request를 지속시켜 주는 것이다.
+
+    app.use = global middleware를 만들 수 있게 해주는 함수
+    global middleware는 어떤 url을 들어가도 사용하게 되는걸 의미한다.
+    express또한 위에서 아래로 읽기 때문에 url을 get하는 순서를 지켜줘야한다.
+
+#### 2022-12-21 미들웨어
 
 #### 2022-12-20 서버생성
+
+#### 2022-12-19 index.js, json 파일 생성, .gitignore, babel, nodemon 사용설정
