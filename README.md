@@ -87,13 +87,49 @@
 
 ### 라우터
 
-    라우터는 컨트롤러와 URL의 관리를 쉽게 해준다.
+    라우터는 컨트롤러와 URL의 독립적인 방법으로 관리를 쉽게 해준다.
 
-#### 2022-12-23 라우터
+    app.get([URL], [Handler])를 사용하여 요청을 처리하는 대신 라우터를 만들고 라우터가 GET 요청을 처리하도록 할 수 있다.
+    app.use("/", homeRouter) 만들기 - 이렇게 하면 사용자가 GET 요청을 보낼 때 요청이 homeRouter로 라우팅된다.
+    그런 다음 아래와 같이 homeRouter라는 상수 변수를 생성한다.
+    const homeRouter = express.Router()
+    아래와 같이 핸들러 함수를 생성한다다.
+    const handleReq = (req, res) => {res.send("Do something") }
+    라우터를 핸들러에 연결하려면 아래 코드를 사용하면 된다.
+    routerOne.get("/", handleReq);
+    그러면 사용자가 URL "/" 가져오기를 요청할 때 Express [앱]에서 라우터 [homeRouter], 핸들러 기능 [handleReq]으로 라우팅된다.
 
-#### 2022-12-22 외부 미들웨어
+    router와 controller를 같이 쓰는 건 좋지않기 때문에 서로 다른 폴더로 분리하고 파일을 만들어서 export 해준다.
+    각각의 파일은 독립적이라서 파일을 공유하려면 export 먼저하고 import를 해야한다.
 
-#### 2022-12-21 미들웨어
+    export default globalRouter <- 밑에 적어줌으로서 export가 가능하다.
+    사용하려는 파일에서는 import globalRouter from "./routers/globalRouter" 으로 불러낼 수 있고 default export로 참조한 코드이기 때문에 import 할 때 이름은 자유롭게 사용해도 상관없다.
+
+    두개 이상 import를 하려면 export를 하는 파일에서 export를 하려는 지정된 코드들 제일 앞에 export를 적어준다.
+    export const edit = (req, res) => res.send("edit");
+    export const remove = (req, res) => res.send("Remove");
+
+    아래와 같이 구체적으로 적어서 사용하면 두개 이상 가져올 수 있고 같은 이름을 사용해야한다.
+    import { edit, remove } from "../controllers/userController";
+
+    url 매개변수에서 videoRouter.get("/:id", see);
+    : <- 매개변수가 들어갈 자리를 알려준다.
+
+    정규식 (\\d+)를 사용하면 숫자만 받을 수 있다.
+    videoRouter.get("/:id(\\d+)", see);
+    (js 에서는 \하나 더 붙이기)
+
+    Routing
+    https://expressjs.com/ko/guide/routing.html
+
+    정규표현식 테스트 사이트
+    https://www.regexpal.com
+
+#### 2022-12-23 Routers, Exports-Import, URL Parameters
+
+#### 2022-12-22 External Middlewares
+
+#### 2022-12-21 Middlewares
 
 #### 2022-12-20 서버생성
 

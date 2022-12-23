@@ -3,18 +3,23 @@ import express from "express"; // 최신 코드
 
 import morgan from "morgan";
 
+import globalRouter from "./routers/globalRouter";
+import videoRouter from "./routers/videoRouter";
+import userRouter from "./routers/userRouter";
+
 const PORT = 4000;
 
 const app = express();
+const logger = morgan("dev");
 
-const logger = (req, res, next) => {
-  console.log(`${req.method} ${req.url}`);
-  next();
-};
+// const logger = (req, res, next) => {
+//   console.log(`${req.method} ${req.url}`);
+//   next();
+// };
 
-const handleHome = (req, res) => {
-  return res.send("<h1>I still love you.</h1>");
-};
+// const handleHome = (req, res) => {
+//   return res.send("<h1>I still love you.</h1>");
+// };
 
 // 위와 아래는 같은 코드
 // function handleHome(req, res) {
@@ -53,11 +58,13 @@ const handleHome = (req, res) => {
 // app.get("/login", (req, res) => {
 //   return res.send("Login here.");
 // });
+// app.get("/", logger, handleHome);
 
-const loggerMiddleware = morgan("dev");
+// app.use(logger);
 
-app.use(loggerMiddleware);
-app.get("/", logger, handleHome);
+app.use("/", globalRouter);
+app.use("/videos", videoRouter);
+app.use("/users", userRouter);
 
 const handleListening = () =>
   console.log(`Server listening on port http://localhost:${PORT} 🚀`);
