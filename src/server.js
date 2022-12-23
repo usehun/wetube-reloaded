@@ -1,6 +1,8 @@
 import express from "express"; // 최신 코드
 // const express = require("express") 위와 같은 코드
 
+import morgan from "morgan";
+
 const PORT = 4000;
 
 const app = express();
@@ -52,6 +54,9 @@ const handleHome = (req, res) => {
 //   return res.send("Login here.");
 // });
 
+const loggerMiddleware = morgan("dev");
+
+app.use(loggerMiddleware);
 app.get("/", logger, handleHome);
 
 const handleListening = () =>
