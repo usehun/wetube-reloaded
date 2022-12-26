@@ -125,6 +125,37 @@
     정규표현식 테스트 사이트
     https://www.regexpal.com
 
+### Pug
+
+    npm i pug를 적어 pug를 설치한다.
+    View Engine: 뷰엔진은 서버에서 처리한 데이터 결과값을 정적인 페이지(HTML 파일)에 보다 편리하게 출력해주기 위해 사용한다.
+    뷰엔진에서 요구하는 형태로 템플릿 파일(문서)을 만들고, 해당 템플릿 문서에 서버에서 처리한 데이터를 전달하면 해당 데이터를 화면에 출력할 수 있다.
+
+    app에 우리의 view engine이 pug라고 말해줘야 함
+    => app.set("view engine", "pug");
+    express가 views 디렉토리에서 pug 파일을 찾도록 설정되어있다.
+
+    pug 안에 Js넣는법
+    #{Js code}
+
+    pug의 장점
+    1. 깔끔한 html을 작성하게 함
+    2. 자바스크립트를 html에 포함할 수 있음
+    3. 한 파일로 모든 템플릿을 업데이트할 수 잇음 (반복X)
+
+    여기서 views를 보면 default가 process.cwd() + '/views' 로 되어있음
+    cwd는 current working directory = 즉 package.json이 있는 곳이다!
+    우리가 render하고싶은 pug file들은 youtubeclone/src/views에 있는데
+    현재는 youtubeclone/views에서 찾으니 에러가 발생한다.
+    app.set("views", process.cwd() + "/src/views"); 를 추가해 위치를 바꿔주자!
+
+    res.render("연결할곳" , {변수:"내용" });
+
+    MVP Styles
+    link(rel="stylesheet" href="https://unpkg.com/mvp.css")
+
+#### 2022-12-26 TEMPLATES, MVP Styles
+
 #### 2022-12-23 Routers, Exports-Import, URL Parameters
 
 #### 2022-12-22 External Middlewares
