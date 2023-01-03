@@ -1,3 +1,5 @@
+import "./db"; // 데이터베이스
+import "./models/Video"; // 모델
 import express from "express"; // 최신 코드
 // const express = require("express") 위와 같은 코드
 
@@ -10,7 +12,7 @@ import userRouter from "./routers/userRouter";
 const PORT = 4000;
 
 const app = express();
-// const logger = morgan("dev");
+const logger = morgan("dev");
 
 // const logger = (req, res, next) => {
 //   console.log(`${req.method} ${req.url}`);
@@ -44,7 +46,7 @@ const app = express();
 //   return res.send("Welcome to the private lounge.");
 // };
 
-// app.use(logger);  // 전체에 실행
+app.use(logger); // 전체에 실행
 // app.use(privateMiddleware);
 
 // app.get("/login", handleLogin);
@@ -69,6 +71,6 @@ app.use("/videos", videoRouter);
 app.use("/users", userRouter);
 
 const handleListening = () =>
-  console.log(`Server listening on port http://localhost:${PORT} 🚀`);
+  console.log(`✅ Server listening on port http://localhost:${PORT} 🚀`);
 
 app.listen(PORT, handleListening);

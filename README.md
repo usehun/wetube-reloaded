@@ -154,6 +154,52 @@
     MVP Styles
     link(rel="stylesheet" href="https://unpkg.com/mvp.css")
 
+### Conditionals, Iteration, Mixins
+
+    if, else if, else문
+
+    h1= pageTitle 은 #{pageTitle} 같다.
+
+    ul
+        if fakeUser.loggedIn
+            li
+                a(href="/logout") Log out
+        else
+            li
+                a(href="/login") Login
+
+    Iteration (반복)
+    Pug는 each와 while라는 두 가지 기본 반복 방법을 지원한다.
+        ul
+            each val in [1, 2, 3, 4, 5]
+                li= val
+
+
+    배열이나 객체에 반복할 값이 없으면 실행될 else 블록을 추가할 수도 있다.
+    - var values = [];
+    ul
+        each val in values
+            li= val
+        else
+            li There are no values
+
+    Mixins
+    Mixin을 사용하면 재사용 가능한 Pug 블록을 만들 수 있다.
+    또한 Mixindm은 함수로 컴파일되며 인수를 사용할 수 있다.
+
+### 몽고DB 설치, DB연결, Model 생성
+
+    Mongo DB를 사용하기 위해서 Mongo, Mongo shell이 필요하다.
+
+    npm i mongoose 설치하고 mongoose를 사용하여 DB의 주소를 가져온다.
+
+    model을 만드는 이유는 DB의 구조에 대해 알려줘야 하기 떄문이다.
+    model의 형태는 schema라고 한다.
+
+#### 2022-12-31 MongoDB, DB 연결, Model 생성
+
+#### 2022-12-28 Conditionals, Iteration, Mixins
+
 #### 2022-12-26 TEMPLATES, MVP Styles
 
 #### 2022-12-23 Routers, Exports-Import, URL Parameters
@@ -165,3 +211,10 @@
 #### 2022-12-20 서버생성
 
 #### 2022-12-19 index.js, json 파일 생성, .gitignore, babel, nodemon 사용설정
+
+오류
+warning: LF will be replaced by CRLF in package.json.
+The file will have its original line endings in your working directory
+
+해결
+git config --global core.autocrlf true
