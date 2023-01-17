@@ -5,7 +5,7 @@ const videoSchema = new mongoose.Schema({
   // title : {type : String} 위와는 같은 코드
   description: String,
   createAt: Date,
-  hashtags: [{ tpye: String }],
+  hashtags: [{ type: String }],
   meta: {
     views: Number,
     rating: Number,

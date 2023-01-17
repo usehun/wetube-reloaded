@@ -196,6 +196,80 @@
     model을 만드는 이유는 DB의 구조에 대해 알려줘야 하기 떄문이다.
     model의 형태는 schema라고 한다.
 
+### callback, promise
+
+    db.js에 db와 관련 없는 부분을 init.js로 분리
+    외부 데이터베이스를 연동함에 있어 처리 방식 2가지 (callback, promise)
+
+    callback function 의 장점은 에러들을 바로 볼 수 있다.
+    하지만 js의 단점은 기다리는 기능이 없어서 아무리 위에서 아래로 읽어도 database에서 불러오는 시간이 있어서 순서가 꼬인다.
+    그래서 callback function을 썼었다.
+
+    await는 database에게 결과값을 받을때까지 js가 기다리게 해줄 수 있다.
+    await,async의 장점은 매우 직관적이다. 즉 js 가 어디서 어떻게 기다리는지 알 수 있다.
+    await는 규칙상 function이 async 상태일때만 안에서 사용 가능!
+    하지만 callback function과 달리 promise방식은 error 가 어디서 오는지 명확하지가 않다.
+    그래서 try catch 방법을 쓴다
+    말그대로 try 안에 있는 코드를 실행해보고 오류가 생기면 catch 안에 코드가 실행되는구조
+
+    callback
+    video.find({}, (error, videos) => {
+        if(error){
+            return res.render("server-error")
+        }
+            return res.render("home")
+    });
+
+    promise
+    export const home = async (req, res) => {
+        try {
+            const videos = await video.find({});
+            return res.render("home", { pageTitle: "Home", videos });
+        } catch {
+            return res.render("server-error");
+        }
+    };
+
+### 라우터, 컨트롤러 수정, pug 수정
+
+    route().get().post();
+    get, post 메서드를 같이 쓰는 방법이다.
+
+    req.body
+    req.body에는 form을 통해 submit된 데이터의 키-값 쌍을 포함한다.
+    기본적으로는 undefined이며 express.json() 또는 express.urlencoded()와 같은 바디 파싱 미들웨어를 사용할 때 값을 받아온다.
+
+    app.use(express.urlencoded({ extended: true }));
+    express.urlencoded({extended:true}) HTML form 의 body를 이해해서 우리가 쓸 수 있는 멋진 자바스크립트 형식으로 변형시켜줄 수 있다.
+
+    form 에 대한 data를 보낼때 input의 name 으로 정보를 받기 때문에 꼭 form엔 name을 정해줘야한다!
+
+### 모델 생성, 데이터 추가
+
+    import mongoose from "mongoose";
+    몽구스를 import 한 후 컨트롤러에서 사용될 모델의 틀을 만든다.
+
+    ```
+    const { title, description, hashtags } = req.body;
+    const video = new Video({
+        title: title,
+        description: description,
+        createdAt: Date.now(),
+        hashtags: hashtags.split(",").map((word) => `#${word}`),
+        meta: {
+        views: 0,
+        rating: 0,
+        },
+    });
+    await video.save();
+    ```
+
+#### 2023-01-17 모델 생성, 데이터 생성
+
+#### 2023-01-04 mongoose 설치, 라우터 수정, 컨트롤러 수정, pug 수정
+
+#### 2023-01-03 콜백함수
+
 #### 2022-12-31 MongoDB, DB 연결, Model 생성
 
 #### 2022-12-28 Conditionals, Iteration, Mixins
