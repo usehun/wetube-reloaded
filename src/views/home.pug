@@ -2,8 +2,6 @@ extends base.pug
 include mixins/video
 
 block content
-    h2 home
-    
     div
         each info in videos
             +video(info)

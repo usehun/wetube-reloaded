@@ -249,6 +249,8 @@
     import mongoose from "mongoose";
     몽구스를 import 한 후 컨트롤러에서 사용될 모델의 틀을 만든다.
 
+
+    만든 모델을 컨트롤러에서 사용한다.
     ```
     const { title, description, hashtags } = req.body;
     const video = new Video({
@@ -263,6 +265,17 @@
     });
     await video.save();
     ```
+
+### 컨트롤러 error추가, 모델 default,schema 설정
+
+    컨트롤러에 try,catch 구문을 사용하여 에러가 생겼을 상황에 대비
+
+    모델 스케마에 default를 사용하여 컨트롤러에서 직접 입력하지 않아도 자동으로 입력, max,trim,min을 사용하여 조금 더 상세하게 데이터 입력 가능.
+
+    16진법 변환을 사용해서 video.id가 컨트롤러에서 이해하도록 변환
+    ( /[0-9a-f]{24})
+
+#### 2023-01-19 try,catch 구문, error추가, 모델 설정
 
 #### 2023-01-17 모델 생성, 데이터 생성
 
