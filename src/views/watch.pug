@@ -3,5 +3,6 @@ extends base.pug
 block content
     div
         p=video.description
+        p=video.hashtags
         small= video.createAt
     a(href=`${video.id}/edit`) Edit Video &rarr;

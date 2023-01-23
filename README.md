@@ -275,6 +275,42 @@
     16진법 변환을 사용해서 video.id가 컨트롤러에서 이해하도록 변환
     ( /[0-9a-f]{24})
 
+### Upload hashtags 수정, 몽고 사용
+
+    몽구스로 모델에서 스케마.pre를 사용하여 저장전에 해시태그의 문법을 수정한다.
+
+    videoSchema.pre("save", async function () {
+    this.hashtags = this.hashtags[0]
+        .split(",")
+        .map((word) => (word.startsWith("#") ? word : `#${word}`));
+    });
+
+    1. 몽고 사용하기
+    > mongosh
+
+    2. 내가 가진 db 보기
+    > show dbs
+
+    3. 현재 사용 중인 db 확인
+    > db
+
+    4. 사용할 db 선택하기
+    > use dbName
+    (현재 수업에서는 `use wetube`)
+
+    5. db 컬렉션 보기
+    > show collections
+
+    6. db 컬렉션 안에 documents 보기
+    > db.collectionName.find()
+    (현재 수업에서는 `db.videos.find()`)
+
+    7. db 컬렉션 안에 documents 내용 모두 제거하기
+    > db.collectionName.remove({})
+    (현재 수업에서는 `db.videos.remove({})`)
+
+#### 2023-01-23 hashtags 수정
+
 #### 2023-01-19 try,catch 구문, error추가, 모델 설정
 
 #### 2023-01-17 모델 생성, 데이터 생성
