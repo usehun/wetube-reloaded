@@ -1,5 +1,8 @@
 import mongoose from "mongoose";
 
+// export const formatHashtags = (hashtags) =>
+//   hashtags.split(",").map((word) => (word.startsWith("#") ? word : `#${word}`));
+
 const videoSchema = new mongoose.Schema({
   title: { type: String, require: true, trim: true, maxLenght: 30 },
   // title : {type : String} 위와는 같은 코드
@@ -12,8 +15,8 @@ const videoSchema = new mongoose.Schema({
   },
 });
 
-videoSchema.pre("save", async function () {
-  this.hashtags = this.hashtags[0]
+videoSchema.static("formatHashtags", function (hashtags) {
+  return hashtags
     .split(",")
     .map((word) => (word.startsWith("#") ? word : `#${word}`));
 });

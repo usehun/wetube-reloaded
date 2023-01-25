@@ -309,6 +309,26 @@
     > db.collectionName.remove({})
     (현재 수업에서는 `db.videos.remove({})`)
 
+### Delete 추가, Search 추가
+
+    export const deleteVideo = async (req, res) => {
+    const { id } = req.params;
+    await Video.findByIdAndDelete(id);
+    return res.redirect("/");
+    };
+
+    findByIdAndDelete(id) (=findOneAndDelete({_id:id}))
+
+    model.sort({정렬하고싶은 기준 : desc(내림차순) , asc(오름차순)})
+    Video.find({}).sort({ createdAt: "asc" })
+
+    라우터로 지정한 :id -> req.params
+    pug파일에서 input으로 받은 내용 -> req.body(form이 POST일 때)
+    pug파일에서 input으로 받은 url내용 -> req.query (form이 GET일 때)
+    const { keyword } = req.query;
+
+#### 2023-01-25 Delete, Search 추가
+
 #### 2023-01-23 hashtags 수정
 
 #### 2023-01-19 try,catch 구문, error추가, 모델 설정

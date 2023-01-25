@@ -14,12 +14,13 @@ import Video from "../models/Video";
 
 export const home = async (req, res) => {
   try {
-    const videos = await Video.find({});
+    const videos = await Video.find({}).sort({ createAt: "desc" });
     return res.render("home", { pageTitle: "Home", videos });
   } catch (error) {
     return res.render("error");
   }
 };
+
 export const watch = async (req, res) => {
   const { id } = req.params;
   // const id = req.params.id;
@@ -32,7 +33,18 @@ export const watch = async (req, res) => {
   }
   return res.render("watch", { pageTitle: video.title, video });
 };
+
 export const getEdit = async (req, res) => {
+  const { id } = req.params;
+  const video = await Video.findById(id);
+
+  if (!video) {
+    return res.render("404", { pageTitle: "Video not found." });
+  }
+  return res.render("edit", { pageTitle: `Edit: ${video.title}`, video });
+};
+
+export const postEdit = async (req, res) => {
   const { id } = req.params;
   const { title, description, hashtags } = req.body;
 
@@ -45,19 +57,10 @@ export const getEdit = async (req, res) => {
   await Video.findByIdAndUpdate(id, {
     title,
     description,
-    hashtags: hashtags
-      .split(",")
-      .map((word) => (word.startsWith("#") ? word : `#${word}`)),
+    // hashtags: formatHashtags(hashtags),
+    hashtags: Video.formatHashtags(hashtags),
   });
 
-  await video.save();
-
-  return res.render("edit", { pageTitle: `Edit: ${video.title}`, video });
-};
-
-export const postEdit = (req, res) => {
-  const { id } = req.params;
-  const { title } = req.body;
   return res.redirect(`/videos/${id}`);
 };
 
@@ -71,7 +74,7 @@ export const postUpload = async (req, res) => {
     const video = new Video({
       title: title,
       description: description,
-      hashtags: hashtags,
+      hashtags: Video.formatHashtags(hashtags),
     });
     await video.save();
 
@@ -90,4 +93,17 @@ export const postUpload = async (req, res) => {
       errorMessage: error._message,
     });
   }
+};
+
+export const deleteVideo = async (req, res) => {
+  const { id } = req.params;
+
+  await Video.findByIdAndDelete(id);
+  return res.redirect("/");
+};
+
+export const search = (req, res) => {
+  const { keyword } = req.query;
+
+  return res.render("search", { pageTitle: "Search" });
 };
