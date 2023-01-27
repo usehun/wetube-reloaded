@@ -1,5 +1,6 @@
 import "./db"; // 데이터베이스
 import "./models/Video"; // 모델
+import "./models/User"; // 모델
 import app from "./server";
 
 const PORT = 4000;

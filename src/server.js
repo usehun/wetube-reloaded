@@ -3,7 +3,7 @@ import express from "express"; // 최신 코드
 
 import morgan from "morgan"; // 로그 관리 미들웨어
 
-import globalRouter from "./routers/globalRouter";
+import rootRouter from "./routers/rootRouter";
 import videoRouter from "./routers/videoRouter";
 import userRouter from "./routers/userRouter";
 
@@ -64,7 +64,7 @@ app.set("views", process.cwd() + "/src/views");
 app.use(logger); // 전체에 실행
 
 app.use(express.urlencoded({ extended: true }));
-app.use("/", globalRouter);
+app.use("/", rootRouter);
 app.use("/videos", videoRouter);
 app.use("/users", userRouter);
 

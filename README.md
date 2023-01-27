@@ -327,6 +327,24 @@
     pug파일에서 input으로 받은 url내용 -> req.query (form이 GET일 때)
     const { keyword } = req.query;
 
+### Search 수정
+
+    Model.find()
+    documents를 찾는다. (findOne과 다르게 전체 document를 찾는다.)
+    Mongoose는 명령이 전송되기 전에 모델의 스키마와 일치하도록 필터를 캐스팅한다.
+
+    videos title을 검색할때 keyword가 포함된것들을 regex operator를 통해 검색해 줄 수 있다.
+    (regex = regular expression의 약자)
+    const { keyword } = req.query;
+
+    $regex: new RegExp(keyword, "i") -> keyword가 포함된 것들을 검색.
+    $regex: new RegExp(`^${keyword}`, "i") -> keyword로 시작되는 것들을 검색.
+    $regex: new RegExp(`${keyword}$`, "i") -> keyword로 끝나는 것들을 검색.
+    (여기서 "i" = Welcome,welcome 둘다 같게 해주는것 즉 lowercase,uppercase의 구분을 없게 해주는것)
+    ( mongoose가 아닌 mongoDB가 해주는 기능이다)
+
+#### 2023-01-26 Search 수정
+
 #### 2023-01-25 Delete, Search 추가
 
 #### 2023-01-23 hashtags 수정
