@@ -343,6 +343,8 @@
     (여기서 "i" = Welcome,welcome 둘다 같게 해주는것 즉 lowercase,uppercase의 구분을 없게 해주는것)
     ( mongoose가 아닌 mongoDB가 해주는 기능이다)
 
+#### 2023-02-01 Join(form, controller, model, router)
+
 #### 2023-01-26 Search 수정
 
 #### 2023-01-25 Delete, Search 추가
