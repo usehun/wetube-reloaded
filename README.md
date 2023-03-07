@@ -343,6 +343,23 @@
     (여기서 "i" = Welcome,welcome 둘다 같게 해주는것 즉 lowercase,uppercase의 구분을 없게 해주는것)
     ( mongoose가 아닌 mongoDB가 해주는 기능이다)
 
+#### Join
+
+### Returns, Renders
+
+    return의 역할 : 본질적인 return의 역할보다는 function을 마무리짓는 역할로 사용되고 있음.
+    - 이러한 경우 return이 없어도 정상적으로 동작하지만 실수를 방지하기 위해 return을 사용
+    render한 것은 다시 render할 수 없음
+    - redirect(), sendStatus(), end() 등등 포함 (express에서 오류 발생)
+
+### Hash
+
+    npm i bcrypt 설치
+
+#### 2023-03-07 Hashing
+
+#### 2023-02-28 Returns, Renders
+
 #### 2023-02-01 Join(form, controller, model, router)
 
 #### 2023-01-26 Search 수정
