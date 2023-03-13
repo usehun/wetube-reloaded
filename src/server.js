@@ -2,6 +2,7 @@ import express from "express"; // 최신 코드
 // const express = require("express") 위와 같은 코드
 
 import morgan from "morgan"; // 로그 관리 미들웨어
+import session from "express-session"; // 세션 미들 웨어
 
 import rootRouter from "./routers/rootRouter";
 import videoRouter from "./routers/videoRouter";
@@ -64,6 +65,15 @@ app.set("views", process.cwd() + "/src/views");
 app.use(logger); // 전체에 실행
 
 app.use(express.urlencoded({ extended: true }));
+
+app.use(
+  session({
+    secret: "Hello",
+    resave: true,
+    saveUninitialized: true,
+  })
+); // 라우터 앞에 코드를 작성
+
 app.use("/", rootRouter);
 app.use("/videos", videoRouter);
 app.use("/users", userRouter);
