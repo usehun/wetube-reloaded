@@ -388,6 +388,36 @@
     - 서버는 session으로 해당 증표를 가진 유저의 기록을 저장해둠
     - 유저가 증표(쿠키)를 가지고 오면 서버는 저장되어 있는 session을 통해 유저를 쉽게 확인
 
+### Session, Cookies
+
+    브라우저에서 웹사이트를 방문할 때, session middleware가 있으면, (아래)
+
+    app.use(
+        session({
+        secret: "Hello!",
+        resave: true,
+        saveUninitialized: true,
+        })
+    );
+
+    express는 알아서 그 브라우저를 위한 session id를 만들고
+    브라우저에게 보내줌 (자동)
+
+    브라우저는 쿠키에 그 session id를 저장하고
+    exporess에서도 세션을 세션 DB에 저장
+
+    DB에 있는 id === Cookies에 있는 id
+
+    서버가 브라우저에게 보내 쿠키에 저장한 세션 id는
+    브라우저가 localhost:4000의 모든 URL에 요청을 보낼 때마다
+    세션 id를 req와 함께 보낸다.
+    => 백엔드에서는 어떤 유저가, 어떤 브라우저에서 요청을 보냈는지 알 수 있음
+
+    세션은 서버측에서 제공해주는 데이터,
+    쿠키는 클라이언트측에서 저장하고 사용하는 데이터
+
+#### 2023-04-10 Session, Cookies
+
 #### 2023-03-13 User 컨트롤러 수정, status code, 세션 미들웨어
 
 #### 2023-03-07 Hashing

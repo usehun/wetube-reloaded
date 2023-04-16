@@ -74,6 +74,19 @@ app.use(
   })
 ); // 라우터 앞에 코드를 작성
 
+app.use((req, res, next) => {
+  // console.log(req.headers);
+  req.sessionStore.all((error, session) => {
+    console.log(session);
+    next();
+  });
+});
+
+app.get("/add-one", (req, res, next) => {
+  req.session.potato += 1;
+  return res.send(`${req.session.id}`);
+});
+
 app.use("/", rootRouter);
 app.use("/videos", videoRouter);
 app.use("/users", userRouter);
